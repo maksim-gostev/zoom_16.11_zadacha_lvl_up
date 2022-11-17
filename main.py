@@ -25,10 +25,12 @@ if __name__ == '__main__':
         damag_heroes = heroes.bite()
         print(f'Герой бьёт дракона на {damag_heroes}')
         dragon.get_damage(damag_heroes)
+        print(f'У дракона осталось здоровья {dragon.get_health()}')
         if dragon.get_is_alive():
             damag_dragon = dragon.bite()
             print(f'Дракон бьёт героя на {damag_dragon}')
             heroes.get_damage(damag_dragon)
+            print(f'У героя осталось здоровья {heroes.get_health()}')
             if not heroes.get_is_alive():
                 print('Герой погиб')
                 break
@@ -38,6 +40,7 @@ if __name__ == '__main__':
             print(f'Герой получил {dragon.get_xp()} опыта')
             heroes.recovery_hp(hp_heroes)
             heroes.add_experience(dragon.get_xp())
+            break
 
         print(f'Раунд {count}')
         count += 1
