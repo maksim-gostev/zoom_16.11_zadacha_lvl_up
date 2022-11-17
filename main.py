@@ -8,6 +8,8 @@ if __name__ == '__main__':
     # создаём героя
     heroes = Heroes('nub')
 
+    hp_heroes = heroes.get_health()
+
     # левел героя
     lvl_heroes = heroes.get_level()
 
@@ -32,7 +34,9 @@ if __name__ == '__main__':
                 break
         else:
             print('Дракон погиб')
+            print(f'Здоровье героя {heroes.get_health()}')
             print(f'Герой получил {dragon.get_xp()} опыта')
+            heroes.recovery_hp(hp_heroes)
             heroes.add_experience(dragon.get_xp())
 
         print(f'Раунд {count}')
@@ -42,7 +46,3 @@ if __name__ == '__main__':
 
         print(f'Герой повысил уровень до {heroes.get_level()}')
         print(f'Его здоровье выросло до {heroes.get_health()}, а урон до {heroes.get_damag_heroes()}')
-
-
-
-

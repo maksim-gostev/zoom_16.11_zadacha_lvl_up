@@ -54,3 +54,6 @@ class Heroes:
 
     def get_damag_heroes(self):
         return self.damage
+
+    def recovery_hp(self, hp):
+        self.hp = hp
