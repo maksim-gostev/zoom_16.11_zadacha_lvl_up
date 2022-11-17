@@ -1,36 +1,48 @@
-class Heroec:
-    def __init__(self, name):
-        self.name = name
-        self.hp = 100
-        self.xp = 0
-        self.lvl = 1
-        self.lvl_up = 15
+import random
 
-    def add_experience(self, point):
-        self.xp += point
-        next_lvl = self.lvl
-        while self.xp >= self.lvl_up:
-            self.xp -= self.lvl_up
-            next_lvl += 1
-            self.lvl_up *= 2
+from dragon import Dragon
+from heroes import Heroes
 
-            self.hp += self.hp / 2
-            if self.hp % 10 > 0 :
-                self.hp = (self.hp // 10 + 1) * 10
-        self.lvl = next_lvl
+if __name__ == '__main__':
 
-    def get_level(self):
-        return f'левел {self.lvl}'
+    # создаём героя
+    heroes = Heroes('nub')
 
-    def get_health(self):
-        return f'здоровье {self.hp}'
+    # левел героя
+    lvl_heroes = heroes.get_level()
+
+    # создаём дракона
+    dragon = Dragon(random.randint(1, heroes.get_level()))
+    print(f'Появился дракон, у него {dragon.get_health()} здоровья')
+
+    # счётчик раундов
+    count = 2
+
+    # цмкл обмена ударами
+    while heroes.get_is_alive() and dragon.get_is_alive():
+        damag_heroes = heroes.bite()
+        print(f'Герой бьёт дракона на {damag_heroes}')
+        dragon.get_damage(damag_heroes)
+        if dragon.get_is_alive():
+            damag_dragon = dragon.bite()
+            print(f'Дракон бьёт героя на {damag_dragon}')
+            heroes.get_damage(damag_dragon)
+            if not heroes.get_is_alive():
+                print('Герой погиб')
+                break
+        else:
+            print('Дракон погиб')
+            print(f'Герой получил {dragon.get_xp()} опыта')
+            heroes.add_experience(dragon.get_xp())
+
+        print(f'Раунд {count}')
+        count += 1
+
+    if heroes.get_level() > lvl_heroes:
+
+        print(f'Герой повысил уровень до {heroes.get_level()}')
+        print(f'Его здоровье выросло до {heroes.get_health()}, а урон до {heroes.get_damag_heroes()}')
 
 
-a = Heroec('нуб')
-a.add_experience(60)
-print(a.get_level())
-print(a.get_health())
-a.add_experience(60)
-print(a.get_health())
-print(a.get_level())
-a.add_experience(200)
+
+
