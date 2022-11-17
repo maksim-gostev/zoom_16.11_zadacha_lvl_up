@@ -11,7 +11,7 @@ class Heroec:
         count_hp = 1
         count_lvl = 1
         next_lvl = self.lvl
-        while self.xp > 0:
+        while self.xp >= self.lvl_up:
             self.xp -= self.lvl_up
             next_lvl += 1
             self.lvl_up *= 2
